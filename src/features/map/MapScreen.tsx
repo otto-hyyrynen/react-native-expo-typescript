@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { ActivityIndicator, Dimensions, StyleSheet } from 'react-native';
+import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
-
-import { Text, View } from '../components/Themed';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import themeStyles from '../../styles/theme.styles';
 
 interface Location {
   coords: {
@@ -20,8 +20,8 @@ interface Location {
 
 export default function MapScreen() {
   const defaultLocation = {
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: 61.470426,
+    longitude: 23.933906,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -50,14 +50,13 @@ export default function MapScreen() {
     text = JSON.stringify(location);
   }
 
-  if (!location) {
-    return <View style={styles.container}>
-      <ActivityIndicator />
-    </View>
-  }
+  console.log('location', location)
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Map</Text>
+      </View>
       <MapView
         initialRegion={location ? {
           latitude: location.coords.latitude,
@@ -67,10 +66,10 @@ export default function MapScreen() {
         } : defaultLocation}
         style={styles.map}
       >
-        <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324}} title="Test" />
+        <Marker coordinate={{ latitude: 61.470426, longitude: 23.933906 }} title="Liuttu" />
       </MapView>
       <Text style={styles.paragraph}>{text}</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -79,6 +78,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  headerContainer: {
+    marginTop: themeStyles.SPACER_BASIC,
+    padding: themeStyles.SPACER_MINI,
+  },
+  header: {
+    fontSize: themeStyles.FONT_SIZE_EXTRA_LARGE,
+    fontWeight: "600",
+    color: themeStyles.FONT_COLOR_WHITE,
   },
   map: {
     width: Dimensions.get('window').width,
