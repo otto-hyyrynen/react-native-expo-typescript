@@ -1,3 +1,11 @@
+Getting started:
+
+Launch npm run start
+
+Notice! Sometimes expo start -c is required to clean cache. Typically when making babel.config changes.
+
+HISTORY
+
 02.08.2021
     Added Map and Location services through Expo, but getCurrentLocation is
     really slow. Need to implement getLastKnownPositionAsync() and use it
@@ -10,3 +18,8 @@
 
 14.8.2021
     Started testing with firebase realtime database.
+
+28.8.2021
+    Using redux-toolkit RTK to fetch Posts from json placeholder API. Changing
+    js components to typescript. Implemented absolute imports -> requires adding
+    paths to babel.config.js aliases.
